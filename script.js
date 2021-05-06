@@ -100,12 +100,13 @@ function renderNominatedList() {
         alert("You already have 5 movies on the list");
     }
     $(".rmvBtn").on("click", function () {
-        console.log(this.getAttribute("class"))
         let index = movieTitles.indexOf(this.value);
         let indexID = nominatedIDs.indexOf(this.id);
+        let indexLocalStorage = movieObjects.findIndex(e => e.id === this.id);
         movieTitles.splice(index, 1);
         nominatedIDs.splice(indexID, 1);
-        movieObjects.splice(indexID, 1);
+        console.log(indexLocalStorage)
+        movieObjects.splice(indexLocalStorage, 1);
         document.getElementById(this.id).setAttribute("class", "nomBtn btn btn-primary btn-sm")
         $('#' + this.id).prop("disabled", false)
         localStorage.setItem("nominated", JSON.stringify(movieObjects));
