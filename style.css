@@ -1,0 +1,32 @@
+* {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bla {
+    width: 200px;
+    height: 280px;  
+}
+
+.bla2 {
+    width: 50%;
+    max-height: 144.88px;
+}
+
+.yadda {
+    text-align: center !important;
+}
+
+.container {
+    background-color:beige;
+}
+
+#cardNominations {
+    background-color: #7FDBFF;
+}
+
+.searchBar {
+    text-align: left !important;
+}
