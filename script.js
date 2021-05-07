@@ -9,14 +9,17 @@ let poster;
 
 function renderData(a, b, j) {
     let movieElement = $(`
-    <div class="card" id="cardNominations" style="width: 18rem;">
-        <img src="${movieObjects[j].poster}" class="card-img-top bla mx-auto d-block" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">${movieObjects[j].title}</h5>
-        <p class="card-text">${movieObjects[j].year}</p>
-        <a href="#" class="rmvBtn btn btn-secondary" id="${movieObjects[j].id}" value="${b}">Remove</a>
+    <div class="card" id="cardNominations" style="width: 14rem;">
+        <img src="${movieObjects[j].poster}" class="image__img card-img-top cardNom mx-auto d-block" alt="...">
+        <div class="image__overlay">
+            <img src="dundie.png" alt="dundie">
+            <div class="image_title">${movieObjects[j].title}</div>
+            <p class="card-text image__year">${movieObjects[j].year}</p>
+            <div> <a href="#" class="rmvBtn btn btn-danger" id="${movieObjects[j].id}" value="${b}">Remove</a></div>
+        </div>
+        
     </div>
-    </div>
+    
     `)
     return movieElement;
 }
@@ -29,11 +32,11 @@ function renderSearchList() {
         condition = "disabled"
     }
     let movieElement2 = $(`
-    <div class="card" style="width: 13rem;">
-        <img src="${poster}" class="card-img-top bla2 mx-auto d-block" alt="...">
+    <div class="card searchCard" style="width: 10rem;">
+        <img src="${poster}" class="card-img-top cardSearch mx-auto d-block" alt="...">
         <div class="card-body">
-        <h5 class="card-title">${movieTitle}</h5>
-        <p class="card-text">${year}</p>
+        <h6 class="card-title movieNames">${movieTitle}</h6>
+        <p class="card-text pSearch">${year}</p>
         <button class="nomBtn btn btn-primary btn-sm ${condition}" id="${imdbID}" value="${movieTitle + " " + year}" poster="${poster}" title="${movieTitle}" year="${year}" >Nominate</button>
     </div>
     </div>
