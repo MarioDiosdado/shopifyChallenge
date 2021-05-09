@@ -1,4 +1,4 @@
-.image__overlay {
+.image_overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -14,15 +14,15 @@
     transition: opacity 0.25s;
 }
 
-.image__overlay:hover {
+.image_overlay:hover {
     opacity: 1;
 }
 
-.image__overlay:hover > *{
+.image_overlay:hover > *{
     transform: translateY(0);
 }
 
-.image__overlay > * {
+.image_overlay > * {
     transform: translateY(20px);
     transition: transform 0.25s;
 }
@@ -32,7 +32,7 @@
     font-weight: bold;
 }
 
-.image__year {
+.image_year {
     font-size: 1.25em;
     margin-top: 0.25em;
 }

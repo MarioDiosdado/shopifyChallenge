@@ -11,11 +11,11 @@ function renderData(a, b, j) {
     let movieElement = $(`
     <div class="card" id="cardNominations" style="width: 14rem;">
         <img src="${movieObjects[j].poster}" class="image__img card-img-top cardNom mx-auto d-block" alt="...">
-        <div class="image__overlay">
+        <div class="image_overlay">
             <img src="dundie.png" alt="dundie">
             <div class="image_title">${movieObjects[j].title}</div>
-            <p class="card-text image__year">${movieObjects[j].year}</p>
-            <div> <a href="#" class="rmvBtn btn btn-danger" id="${movieObjects[j].id}" value="${b}">Remove</a></div>
+            <p class="card-text image_year">${movieObjects[j].year}</p>
+            <div> <button class="rmvBtn btn btn-danger" id="${movieObjects[j].id}" value="${b}">Remove</button></div>
         </div>
         
     </div>
@@ -26,18 +26,18 @@ function renderData(a, b, j) {
 
 function renderSearchList() {
     let condition;
-    if(movieObjects.filter(e => e.id === imdbID).length <= 0){
+    if (movieObjects.filter(e => e.id === imdbID).length <= 0) {
         condition = "enabled";
     } else {
         condition = "disabled"
     }
     let movieElement2 = $(`
     <div class="card searchCard" style="width: 10rem;">
-        <img src="${poster}" class="card-img-top cardSearch mx-auto d-block" alt="...">
-        <div class="card-body">
-        <h6 class="card-title movieNames">${movieTitle}</h6>
-        <p class="card-text pSearch">${year}</p>
-        <button class="nomBtn btn btn-primary btn-sm ${condition}" id="${imdbID}" value="${movieTitle + " " + year}" poster="${poster}" title="${movieTitle}" year="${year}" >Nominate</button>
+        <img src="${poster}" class="image__img card-img-top cardSearch mx-auto d-block" alt="...">
+        <div class="image_overlay">
+        <div class="image_title">${movieTitle}</div>
+        <p class="card-text image_year">${year}</p>
+        <div><button class="nomBtn btn btn-primary btn-sm ${condition}" id="${imdbID}" value="${movieTitle + " " + year}" poster="${poster}" title="${movieTitle}" year="${year}" >Nominate</button></div>
     </div>
     </div>
     `)
@@ -68,22 +68,27 @@ function displayMovieInfo(movie) {
             }
         }
         $(".nomBtn").on("click", function () {
-            if ((movieTitles.indexOf(this.value) === -1) && (movieObjects.filter(e => e.id === this.id).length <= 0)) {
+            if ((movieTitles.indexOf(this.value) === -1) && (movieObjects.filter(e => e.id === this.id).length <= 0) && (movieObjects.length <= 4)) {
                 movieTitles.push(this.value);
-                nominatedIDs.push(this.id)
+                nominatedIDs.push(this.id);
                 let movieObject = {
                     title: "",
                     year: "",
                     poster: "",
-                    id: ""
+                    id: "",
+                    value: ""
                 }
                 movieObject["title"] = this.title;
                 movieObject["year"] = this.getAttribute("year");
                 movieObject["poster"] = this.getAttribute("poster");
                 movieObject["id"] = this.id;
+                movieObject["value"] = this.title + " " + year;
                 movieObjects.push(movieObject);
                 localStorage.setItem("nominated", JSON.stringify(movieObjects));
                 $(this).prop("disabled", true);
+                if (movieObjects.length >= 5) {
+                    $('#nominationsReady').addClass('fiveGuysDone').removeClass('fiveGuys');
+                }
                 renderNominatedList();
             }
         })
@@ -99,24 +104,23 @@ function renderNominatedList() {
             var b = movieTitles[j];
             list.append(renderData(a, b, j));
         }
-    } else {
-        alert("You already have 5 movies on the list");
     }
     $(".rmvBtn").on("click", function () {
+        console.log(this)
+        console.log("value = " + this.value)
         let index = movieTitles.indexOf(this.value);
+        console.log(index)
         let indexID = nominatedIDs.indexOf(this.id);
         let indexLocalStorage = movieObjects.findIndex(e => e.id === this.id);
         movieTitles.splice(index, 1);
         nominatedIDs.splice(indexID, 1);
-        console.log(indexLocalStorage)
         movieObjects.splice(indexLocalStorage, 1);
         document.getElementById(this.id).setAttribute("class", "nomBtn btn btn-primary btn-sm")
         $('#' + this.id).prop("disabled", false)
         localStorage.setItem("nominated", JSON.stringify(movieObjects));
-        
-        
+        $('#nominationsReady').addClass('fiveGuys').removeClass('fiveGuysDone');
         renderNominatedList();
-        
+
     })
 }
 
@@ -128,4 +132,7 @@ $("#movie-form").on("keyup", function (event) {
 
 window.onload = () => {
     renderNominatedList();
+    if (movieObjects.length >= 5) {
+        $('#nominationsReady').addClass('fiveGuysDone').removeClass('fiveGuys');
+    }
 };
