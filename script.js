@@ -12,7 +12,7 @@ let poster;
 function renderNominationsCard(movieValue, j) {
     let movieElement = $(`
     <div class="card" id="cardNominations" style="width: 14rem;">
-        <img src="${movieObjects[j].poster}" class="image__img card-img-top cardNom mx-auto d-block" alt="...">
+        <img src="${movieObjects[j].poster}" class="card-img-top cardNom mx-auto d-block" alt="...">
         <div class="image_overlay">
             <img src="assets/dundie.png" alt="dundie">
             <div class="image_title">${movieObjects[j].title}</div>
@@ -34,7 +34,7 @@ function renderSearchCard() {
     }
     let movieElement2 = $(`
     <div class="card searchCard" style="width: 10rem;">
-        <img src="${poster}" class="image__img card-img-top cardSearch mx-auto d-block" alt="...">
+        <img src="${poster}" class="card-img-top cardSearch mx-auto d-block" alt="...">
         <div class="image_overlay">
         <div class="image_title">${movieTitle}</div>
         <p class="card-text image_year">${year}</p>
@@ -108,10 +108,7 @@ function renderNominatedList() {
     }
     //With this on click event on the remove button movies are removed from the nomination list and from local storage
     $(".rmvBtn").on("click", function () {
-        console.log(this)
-        console.log("value = " + this.value)
         let index = movieTitles.indexOf(this.value);
-        console.log(index)
         let indexID = nominatedIDs.indexOf(this.id);
         let indexLocalStorage = movieObjects.findIndex(e => e.id === this.id);
         movieTitles.splice(index, 1);
