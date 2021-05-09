@@ -12,7 +12,7 @@ function renderData(a, b, j) {
     <div class="card" id="cardNominations" style="width: 14rem;">
         <img src="${movieObjects[j].poster}" class="image__img card-img-top cardNom mx-auto d-block" alt="...">
         <div class="image_overlay">
-            <img src="dundie.png" alt="dundie">
+            <img src="assets/dundie.png" alt="dundie">
             <div class="image_title">${movieObjects[j].title}</div>
             <p class="card-text image_year">${movieObjects[j].year}</p>
             <div> <button class="rmvBtn btn btn-danger" id="${movieObjects[j].id}" value="${b}">Remove</button></div>
