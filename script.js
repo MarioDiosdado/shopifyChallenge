@@ -12,7 +12,7 @@ let poster;
 function renderNominationsCard(movieValue, j) {
     let movieElement = $(`
     <div class="card" id="cardNominations" style="width: 14rem;">
-        <img src="${movieObjects[j].poster}" class="card-img-top cardNom mx-auto d-block" alt="...">
+        <img src="${movieObjects[j].poster}" class="card-img-top cardNom mx-auto d-block" alt="Searched Movie">
         <div class="image_overlay">
             <img src="assets/dundie.png" alt="dundie">
             <div class="image_title">${movieObjects[j].title}</div>
@@ -34,7 +34,7 @@ function renderSearchCard() {
     }
     let movieElement2 = $(`
     <div class="card searchCard" style="width: 10rem;">
-        <img src="${poster}" class="card-img-top cardSearch mx-auto d-block" alt="...">
+        <img src="${poster}" class="card-img-top cardSearch mx-auto d-block" alt="Nominated movie">
         <div class="image_overlay">
         <div class="image_title">${movieTitle}</div>
         <p class="card-text image_year">${year}</p>
